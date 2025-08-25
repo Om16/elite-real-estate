@@ -3,6 +3,21 @@ const express = require('express');
 require('dotenv').config(); // Load environment variables from .env file
 const { createClient } = require('@supabase/supabase-js');
 
+const cors = require('cors'); // <-- 1. Import the cors package
+
+// 2. Enable CORS for all routes, allowing your Vercel frontend
+app.use(cors({
+  origin: 'https://elite-real-estate-bay.vercel.app' // Your Vercel URL here
+}));
+
+// Optional: Also allow requests from localhost for testing
+// app.use(cors({
+//   origin: ['https://elite-real-estate-bay.vercel.app', 'http://localhost:3000']
+// }));
+
+app.use(express.static('public'));
+// ... rest of your code (Supabase setup, routes, etc.)
+
 // 2. Create an instance of an Express application
 const app = express();
 
